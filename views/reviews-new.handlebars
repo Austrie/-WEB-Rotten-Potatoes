@@ -44,34 +44,41 @@
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
 </style>
-
-<form method="POST" action="/reviews/:id">
+<form method="POST" action="/reviews">
   <fieldset>
     <legend>New Review</legend>
-    {{> reviews-form}}
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
 
-    <!-- <p>
-      <div class="dropdown">
-          <button onclick="openDropDown()" class="dropbtn">Select rating</button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="#">5 Stars</a>
-            <a href="#">4 Stars</a>
-            <a href="#">3 Stars</a>
-            <a href="#">2 Stars</a>
-            <a href="#">1 Star</a>
-          </div>
-      <div>
-    </p> -->
+            {{> reviews-form}}
+
+            <!-- <p>
+              <div class="dropdown">
+                  <button onclick="openDropDown()" class="dropbtn">Select rating</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="#">5 Stars</a>
+                    <a href="#">4 Stars</a>
+                    <a href="#">3 Stars</a>
+                    <a href="#">2 Stars</a>
+                    <a href="#">1 Star</a>
+                  </div>
+              <div>
+            </p> -->
+
+          <!-- Button -->
+          <p>
+            <button type="submit">Save Review</button>
+          </p>
+      </div>
+    </div>
   </fieldset>
-
-  <!-- Button -->
-  <p>
-    <button type="submit">Save Review</button>
-  </p>
 </form>
-
-<div>
-  <a type="button" href="/">Cancel</button>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <div>
+      <a type="button" href="/">Cancel</button>
+    </div>
+  </div>
 </div>
 
 <script>

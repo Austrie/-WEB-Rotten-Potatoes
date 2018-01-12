@@ -36,12 +36,22 @@ app.set('view engine', 'handlebars');
 //});
 //
 
-//Our mock array of projects
-let reviews2 = [
-    { title: "Great Review" },
-    { title: "Next Review" }
-];
+// //Our mock array of projects
+// let reviews2 = [
+//     { title: "Great Review" },
+//     { title: "Next Review" }
+// ];
 
+
+//Delete all em
+app.delete('/reviews/:id', (req, res) => {
+  console.log("Delete review: " + req.params.id);
+  Review.findByIdAndRemove(req.params.id).then((review) => {
+    res.redirect('/');
+  }).catch((err) => {
+    console.log(err.message);
+  });
+});
 
 //Delete a posted review
 app.delete('/reviews/:id', (req, res) => {
@@ -55,6 +65,7 @@ app.delete('/reviews/:id', (req, res) => {
 
 //To submit/update editted review
 app.put('/reviews/:id', (req, res) => {
+  console.log("Reviews put called");
   Review.findByIdAndUpdate(req.params.id, req.body).then((review) => {
     res.redirect('/reviews/' + review._id);
   });
@@ -81,7 +92,7 @@ app.post('/reviews', (req, res) => {
 
   Review.create(req.body).then((review) => {
     console.log("Review after mongodb" + review);
-    return review.save()
+    return review.save();
   }).then((review) => {
     res.redirect('/');
   }).catch((err) => {
@@ -90,7 +101,7 @@ app.post('/reviews', (req, res) => {
 });
 
 app.get('/reviews', (req, res) => {
-    res.render('reviews-index', { reviews2 });
+    res.redirect('/');
 });
 
 app.get('/reviews/new', (req, res) => {
