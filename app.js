@@ -126,6 +126,6 @@ app.get('/', (req, res) => {
 });
 
 //Listens for port 3000: E.g. localhost:3000s
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
    console.log('App listening on port 3000!');
 });
