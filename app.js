@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 
-//In order to use expressjs's delete functionality from form
+//In order to use expressjs's post and delete functionality from form
 var methodOverride = require('method-override')
 app.use(methodOverride('_method'));
 
@@ -50,6 +50,20 @@ app.delete('/reviews/:id', (req, res) => {
     res.redirect('/');
   }).catch((err) => {
     console.log(err.message);
+  });
+});
+
+//To submit/update editted review
+app.put('/reviews.:id', (req, res) => {
+  Review.findByIdAndUpdate(req.params.id, req.body).then((review) => {
+    res.redirect('/reviews/' + review._id);
+  });
+});
+
+//To edit reviews screen
+app.get('reviews/:id/edit', (req, res) => {
+  Review.findById(req.params.id, (err, review) => {
+    res.render('reviews-edit', {review});
   });
 });
 
