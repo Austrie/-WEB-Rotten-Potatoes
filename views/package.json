@@ -1,16 +1,8 @@
 {
-  "name": "-web-rotten-potatoes",
+  "name": "rotten-potatoes",
   "version": "1.0.0",
   "description": "\"# -WEB-Rotten-Potatoes\"",
   "main": "app.js",
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "express-handlebars": "^3.0.0",
-    "method-override": "^2.3.10",
-    "mongoose": "^4.13.9"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Austrie/-WEB-Rotten-Potatoes/issues"
   },
-  "homepage": "https://github.com/Austrie/-WEB-Rotten-Potatoes#readme"
+  "homepage": "https://github.com/Austrie/-WEB-Rotten-Potatoes#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.13.9"
+  }
 }
