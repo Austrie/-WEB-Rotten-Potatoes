@@ -9,7 +9,7 @@ app.use(methodOverride('_method'));
 //We're using MongoDB, so we're using Mongoose for mapping JSON to MongoDB
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes', { useMongoClient: true });
 const Review = mongoose.model('Review', {
   title: String,
   movieTitle: String,
