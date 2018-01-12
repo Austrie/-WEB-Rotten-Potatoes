@@ -54,14 +54,14 @@ app.delete('/reviews/:id', (req, res) => {
 });
 
 //To submit/update editted review
-app.put('/reviews.:id', (req, res) => {
+app.put('/reviews/:id', (req, res) => {
   Review.findByIdAndUpdate(req.params.id, req.body).then((review) => {
     res.redirect('/reviews/' + review._id);
   });
 });
 
-//To edit reviews screen
-app.get('reviews/:id/edit', (req, res) => {
+//To go to edit reviews screen
+app.get('/reviews/:id/edit', (req, res) => {
   Review.findById(req.params.id, (err, review) => {
     res.render('reviews-edit', {review});
   });
