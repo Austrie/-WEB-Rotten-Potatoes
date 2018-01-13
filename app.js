@@ -131,11 +131,22 @@ app.get('/reviews/new', (req, res) => {
 });
 
 app.get('/reviews/:id', (req, res) => {
-  Review.findById(req.params.id).then((review) => {
-    res.render('reviews-show', {review});
+  const findReviews = Review.findById(req.params.id);
+  const findComments = Comment.find({ reviewId: Object(req.params.id) });
+
+  Promise.all([findReviews, findComments]).then((values) => {
+    console.log(values);
+    res.render('reviews-show', { review: values[0], comments: values[1]});
   }).catch((err) => {
     console.log(err.message);
   });
+
+  //Old code before commenting system
+  // Review.findById(req.params.id).then((review) => {
+  //   res.render('reviews-show', {review});
+  // }).catch((err) => {
+  //   console.log(err.message);
+  // });
 });
 
 //Index

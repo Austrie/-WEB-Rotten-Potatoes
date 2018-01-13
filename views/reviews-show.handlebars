@@ -1,16 +1,15 @@
 <a href="/">Back to Home</a>
 <div class="row">
+  <h1>{{review.title}}</h1>
+  <hr>
   <div class="col-sm-4 col-sm-offset-3">
-    <h1>{{review.title}}</h1>
-    <hr>
     <h2>{{review.movieTitle}}</h2>
     <p>{{review.description}}</p>
-
-    <p><a class="btn btn-primary" href="/reviews/{{review._id}}/edit">Edit</a></p>
-    <p><form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
-      <button class="btn btn-danger" type="submit">Delete</button>
-    </form></p>
   </div>
+  <p><a class="btn btn-primary" href="/reviews/{{review._id}}/edit">Edit</a></p>
+  <p><form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
+    <button class="btn btn-danger" type="submit">Delete</button>
+  </form></p>
 </div>
 
 <!-- <hr> -->
@@ -18,3 +17,8 @@
 <!-- Comment form -->
 <p>
 {{> comment-form}}
+
+<hr>
+{{#each comments}}
+  {{> comment}}
+{{/each}}
