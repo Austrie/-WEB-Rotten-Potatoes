@@ -1,0 +1,23 @@
+<form action="/reviews/comment" method="post">
+  <input type="hidden" value="{{review._id}}" name="reviewId">
+
+  <fieldset>
+    <legend>Add A Comment</legend>
+    <!-- Title -->
+    <div class="form-group">
+      <label for="comment-title">Title</label>
+      <input class="form-control" id="comment-title" name="title" type="text" placeholder="Title" />
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="comment-content">Description</label>
+      <textarea class="form-control" id="comment-content" name="content" rows="10" placeholder="Your comment..."/></textarea>
+    </div>
+  </fieldset>
+
+    <!-- Button -->
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Save Comment</button>
+    </div>
+</form>

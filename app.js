@@ -10,11 +10,9 @@ app.use(methodOverride('_method'));
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes', { useMongoClient: true });
-const Review = mongoose.model('Review', {
-  title: String,
-  movieTitle: String,
-  description: String
-});
+const Review = require('./models/review');
+const Comment = require('./models/comment');
+
 
 //Body parser to parse text
 const bodyParser = require('body-parser');
@@ -43,13 +41,17 @@ app.set('view engine', 'handlebars');
 // ];
 
 
-//Delete all em
-app.delete('/reviews/:id', (req, res) => {
-  console.log("Delete review: " + req.params.id);
-  Review.findByIdAndRemove(req.params.id).then((review) => {
+//Delete all of them
+app.get('/reviews/delete/empty', (req, res) => {
+  // console.log("Deleted review: " + req.params.id);
+  // Review.findByIdAndRemove(req.params.id).then((review) => {
+  //   res.redirect('/');
+  // }).catch((err) => {
+  //   console.log(err.message);
+  // });
+
+  Review.where({ title: "" }).remove().then(() => {
     res.redirect('/');
-  }).catch((err) => {
-    console.log(err.message);
   });
 });
 
@@ -78,11 +80,22 @@ app.get('/reviews/:id/edit', (req, res) => {
   });
 });
 
+//New Comment
+app.post('/reviews/comment', (req, res) => {
+  Comment.create(req.body).then((comment) => {
+    // comment.save();
+    console.log(comment.title);
+    res.redirect('/reviews/' + comment.reviewId);
+  }).catch((err) => {
+    console.log(err.message);
+  });
+});
+
 //When a new review is submitted and user is sent back to /reviews
 app.post('/reviews', (req, res) => {
   console.log("Review before mongodb: " + req.body.title);
 
-  const review = new Review(req.body)
+  // const review = new Review(req.body)
 
   // review.save().then((review) => {
   //   res.redirect('/');
@@ -90,9 +103,18 @@ app.post('/reviews', (req, res) => {
   //   console.log(err.message)
   // })
 
+  // title: String,
+  // movieTitle: String,
+  // description: String
+
+  if (req.body.title === "" || req.body.movieTitle === "") {
+    return res.redirect('/reviews/new')
+  }
+
+
   Review.create(req.body).then((review) => {
     console.log("Review after mongodb" + review);
-    return review.save();
+    // return review.save();
   }).then((review) => {
     res.redirect('/');
   }).catch((err) => {

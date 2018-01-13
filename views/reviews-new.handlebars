@@ -52,7 +52,7 @@
 
             {{> reviews-form}}
 
-            <!-- <p>
+            <p>
               <div class="dropdown">
                   <button onclick="openDropDown()" class="dropbtn">Select rating</button>
                   <div id="myDropdown" class="dropdown-content">
@@ -63,23 +63,23 @@
                     <a href="#">1 Star</a>
                   </div>
               <div>
-            </p> -->
+            </p>
 
           <!-- Button -->
           <p>
-            <button type="submit">Save Review</button>
+            <button class="btn btn-primary" type="submit">Save Review</button>
           </p>
       </div>
     </div>
   </fieldset>
 </form>
-<div class="row">
+<!-- <div class="row"> -->
   <div class="col-sm-6 col-sm-offset-3">
     <div>
-      <a type="button" href="/">Cancel</button>
+      <a class="btn btn-danger" role="button" href="/">Cancel</a>
     </div>
   </div>
-</div>
+<!-- </div> -->
 
 <script>
 /* When the user clicks on the button,
@@ -90,16 +90,20 @@ function openDropDown() {
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
-if (!event.target.matches('.dropbtn')) {
+  // event.preventDefault();
+  if (!event.target.matches('.dropbtn')) {
 
-  var dropdowns = document.getElementsByClassName("dropdown-content");
-  var i;
-  for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-    if (openDropdown.classList.contains('show')) {
-      openDropdown.classList.remove('show');
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+        event.preventDefault();
+      }
     }
+  } else {
+    event.preventDefault();
   }
-}
 }
 </script>
